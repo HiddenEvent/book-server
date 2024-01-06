@@ -4,10 +4,15 @@ import me.ricky.boardserver.dto.UserDTO;
 
 public interface UserService {
 
-    void register(UserDTO userDTO);
+    void register(UserDTO userProfile);
+
     UserDTO login(String id, String password);
+
     boolean isDuplicatedId(String id);
-    UserDTO getUserInfo(String id);
+
+    UserDTO getUserInfo(String userId);
+
     void updatePassword(String id, String beforePassword, String afterPassword);
-    void deleteId(String id, String password);
+
+    void deleteId(String id, String passWord);
 }

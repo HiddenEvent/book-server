@@ -6,20 +6,22 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserProfileMapper {
-    UserDTO getUserProfile(@Param("id") String id);
+     UserDTO getUserProfile(@Param("id") String id);
 
-    int insertUserProfile(@Param("id") String id, @Param("password") String password,
-                          @Param("nickname") String nickname,
-                          @Param("createTime") String createTime, @Param("updateTime") String updateTime);
+    int insertUserProfile(@Param("id") String id, @Param("password") String password, @Param("name") String name, @Param("phone") String phone, @Param("address") String address);
+
+    int updateUserProfile(@Param("id") String id, @Param("password") String password, @Param("name") String name, @Param("phone") String phone, @Param("address") String address);
 
     int deleteUserProfile(@Param("id") String id);
 
-    UserDTO findByIdAndPassword(@Param("id") String id, @Param("password") String password);
-    boolean idCheck(@Param("id") String id);
+     int register(UserDTO userDTO);
 
-    int updatePassword(UserDTO userDTO);
+     UserDTO findByIdAndPassword(@Param("id") String id,
+                                       @Param("password") String password);
 
-    int updateAddress(UserDTO userDTO);
+    int idCheck(String id);
 
-    int register(UserDTO dto);
+     int updatePassword(UserDTO userDTO);
+
+     int updateAddress(UserDTO userDTO);
 }
