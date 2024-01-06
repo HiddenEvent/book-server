@@ -1,0 +1,12 @@
+POST {{host}}/users/sign-up
+Content-Type: application/json
+
+{
+  "userId": "ricky",
+  "password": "123",
+  "nickName": "test",
+  "isAdmin": true,
+  "createTime": "2024-01-06T22:14:44",
+  "isWithDraw": false,
+  "status": "DEFAULT"
+}
