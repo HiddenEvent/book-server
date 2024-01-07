@@ -2,16 +2,15 @@ package me.ricky.boardserver.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import me.ricky.boardserver.aop.LoginCheck;
 import me.ricky.boardserver.dto.UserDTO;
 import me.ricky.boardserver.dto.request.UserDeleteId;
 import me.ricky.boardserver.dto.request.UserLoginRequest;
 import me.ricky.boardserver.dto.request.UserUpdatePasswordRequest;
 import me.ricky.boardserver.dto.response.LoginResponse;
 import me.ricky.boardserver.dto.response.UserInfoResponse;
-import me.ricky.boardserver.service.UserService;
 import me.ricky.boardserver.service.impl.UserServiceImpl;
 import me.ricky.boardserver.utils.SessionUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -78,15 +77,16 @@ public class UserController {
     }
 
     @PatchMapping("password")
-    public ResponseEntity<LoginResponse> updateUserPassword(@RequestBody UserUpdatePasswordRequest userUpdatePasswordRequest,
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<LoginResponse> updateUserPassword(String accountId,
+                                                            @RequestBody UserUpdatePasswordRequest userUpdatePasswordRequest,
                                                             HttpSession session) {
         ResponseEntity<LoginResponse> responseEntity = null;
-        String Id = SessionUtil.getLoginMemberId(session);
         String beforePassword = userUpdatePasswordRequest.getBeforePassword();
         String afterPassword = userUpdatePasswordRequest.getAfterPassword();
 
         try {
-            userService.updatePassword(Id, beforePassword, afterPassword);
+            userService.updatePassword(accountId, beforePassword, afterPassword);
             ResponseEntity.ok(new ResponseEntity<LoginResponse>(loginResponse, HttpStatus.OK));
         } catch (IllegalArgumentException e) {
             log.error("updatePassword 실패", e);
