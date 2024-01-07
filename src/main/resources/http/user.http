@@ -1,4 +1,5 @@
-POST {{host}}/users/sign-up
+### 가입
+POST {{host}}{{user}}/sign-up
 Content-Type: application/json
 
 {
@@ -9,4 +10,36 @@ Content-Type: application/json
   "createTime": "2024-01-06T22:14:44",
   "isWithDraw": false,
   "status": "DEFAULT"
+}
+
+### 로그인
+POST {{host}}{{user}}/sign-in
+Content-Type: application/json
+
+{
+  "userId": "ricky",
+  "password": "123"
+}
+
+### 회원 정보 조회
+GET {{host}}{{user}}/my-info
+
+### 로그아웃
+PUT {{host}}{{user}}/logout
+
+### 비밀번호 변경
+PATCH {{host}}{{user}}/password
+Content-Type: application/json
+
+{
+  "beforePassword": "123",
+  "afterPassword": "1234"
+}
+
+### 회원 탈퇴
+DELETE {{host}}{{user}}
+Content-Type: application/json
+
+{
+  "password": "123"
 }

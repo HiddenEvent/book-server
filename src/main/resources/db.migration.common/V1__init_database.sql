@@ -1,33 +1,13 @@
-CREATE TABLE `users`
+CREATE TABLE `user`
 (
-    `id`       INT         NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(45) NOT NULL,
-    `password` VARCHAR(45) NOT NULL,
-    `enabled`  INT         NOT NULL,
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `userId` VARCHAR(45) NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `nickName` VARCHAR(45) NOT NULL,
+    `isAdmin` BOOLEAN NOT NULL DEFAULT 0,
+    `createTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `isWithDraw` BOOLEAN NOT NULL DEFAULT 0,
+    `status` ENUM('DEFAULT', 'ADMIN', 'DELETED') NOT NULL DEFAULT 'DEFAULT',
+    `updateTime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 );
-
-CREATE TABLE `authorities`
-(
-    `id`        int         NOT NULL AUTO_INCREMENT,
-    `username`  varchar(45) NOT NULL,
-    `authority` varchar(45) NOT NULL,
-    PRIMARY KEY (`id`)
-);
-
-INSERT IGNORE INTO `users`
-VALUES (NULL, 'happy', '12345', '1');
-INSERT IGNORE INTO `authorities`
-VALUES (NULL, 'happy', 'write');
-
-CREATE TABLE `customer`
-(
-    `id`    int          NOT NULL AUTO_INCREMENT,
-    `email` varchar(45)  NOT NULL,
-    `pwd`   varchar(200) NOT NULL,
-    `role`  varchar(45)  NOT NULL,
-    PRIMARY KEY (`id`)
-);
-
-INSERT INTO `customer` (`email`, `pwd`, `role`)
-VALUES ('aa@a.com', 'password', 'ADMIN');
