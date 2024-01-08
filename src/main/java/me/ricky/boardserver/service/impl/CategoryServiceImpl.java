@@ -6,6 +6,7 @@ import me.ricky.boardserver.mapper.CategoryMapper;
 import me.ricky.boardserver.service.CategoryService;
 import org.springframework.stereotype.Service;
 
+
 @Service
 @Slf4j
 public class CategoryServiceImpl implements CategoryService {
@@ -20,7 +21,6 @@ public class CategoryServiceImpl implements CategoryService {
         if (accountId == null) throw new RuntimeException("로그인이 필요합니다.");
         categoryMapper.register(categoryDTO);
     }
-
     @Override
     public void update(CategoryDTO categoryDTO) {
         if (categoryDTO == null) {

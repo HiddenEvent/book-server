@@ -28,7 +28,6 @@ public class CategoryController {
     }
 
     @PatchMapping("{categoryId}")
-    @ResponseStatus(HttpStatus.CREATED)
     @LoginCheck(type = LoginCheck.UserType.ADMIN)
     public void update(String accountId,
                        @PathVariable int categoryId,
@@ -39,7 +38,6 @@ public class CategoryController {
     }
 
     @DeleteMapping("{categoryId}")
-    @ResponseStatus(HttpStatus.CREATED)
     @LoginCheck(type = LoginCheck.UserType.ADMIN)
     public void delete(String accountId,
                        @PathVariable int categoryId) {

@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
   "userId": "ricky",
-  "password": "123"
+  "password": "1234"
 }
 
 ### 회원 정보 조회

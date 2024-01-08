@@ -1,0 +1,19 @@
+### 등록
+POST {{host}}{{category}}
+Content-Type: application/json
+
+{
+  "name": "중고거래"
+}
+
+### 수정
+PATCH {{host}}{{category}}/13
+Content-Type: application/json
+
+{
+  "id": 13,
+  "name": "중고거래 수정"
+}
+
+### 삭제
+DELETE {{host}}{{category}}/13
