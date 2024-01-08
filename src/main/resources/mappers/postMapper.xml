@@ -3,15 +3,15 @@
 
 <mapper namespace="me.ricky.boardserver.mapper.PostMapper ">
     <insert id="register" parameterType="me.ricky.boardserver.dto.PostDTO">
-        INSERT INTO post ( name, isAdmin, contents, createdTime, views, categoryId, userId, fileId, updatedTime)
-        VALUES (#{name}, #{isAdmin}, #{contents}, #{createdTime}, #{views}, #{categoryId}, #{userId}, #{fileId}, #{updatedTime})
+        INSERT INTO post ( name, isAdmin, contents, createTime, views, categoryId, userId, fileId, updatedTime)
+        VALUES (#{name}, #{isAdmin}, #{contents}, #{createTime}, #{views}, #{categoryId}, #{userId}, #{fileId}, #{updatedTime})
 
     </insert>
     <select id="selectMyPosts" resultType="me.ricky.boardserver.dto.PostDTO">
         SELECT *
         FROM post
         WHERE userId = #{userId}
-        ORDER BY createdTime DESC
+        ORDER BY createTime DESC
     </select>
     <update id="update" parameterType="me.ricky.boardserver.dto.PostDTO">
         UPDATE post
@@ -21,7 +21,7 @@
             categoryId  = #{categoryId},
             userId      = #{userId},
             fileId      = #{fileId},
-            updatedTime = #{updatedTime}
+            updateTime = #{updatedTime}
         WHERE id = #{id}
     </update>
     <delete id="delete">

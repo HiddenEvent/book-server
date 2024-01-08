@@ -29,7 +29,7 @@ public class PostServiceImpl implements PostService {
             throw new RuntimeException("게시글 등록 에러");
         }
         postDTO.setUserId(userProfile.getId());
-        postDTO.setCreatedTime(new Date());
+        postDTO.setCreateTime(new Date());
         postMapper.register(postDTO);
     }
 

@@ -60,7 +60,7 @@ public class PostController {
                 .categoryId(postRequest.getCategoryId())
                 .userId(userInfo.getId())
                 .fileId(postRequest.getFileId())
-                .updatedTime(new Date())
+                .updateTime(new Date())
                 .build();
         postService.update(postDTO);
         return ResponseEntity.ok(new CommonResponse<>(HttpStatus.OK, "OK", "게시글 수정 성공", postDTO));
