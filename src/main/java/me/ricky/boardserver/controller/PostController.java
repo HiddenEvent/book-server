@@ -55,7 +55,7 @@ public class PostController {
         PostDTO postDTO = PostDTO.builder()
                 .id(postId)
                 .name(postRequest.getName())
-                .contents(postRequest.getContent())
+                .contents(postRequest.getContents())
                 .views(postRequest.getViews())
                 .categoryId(postRequest.getCategoryId())
                 .userId(userInfo.getId())
@@ -86,7 +86,7 @@ public class PostController {
     @Getter
     private static class PostRequest {
         private String name;
-        private String content;
+        private String contents;
         private int views;
         private int categoryId;
         private int userId;

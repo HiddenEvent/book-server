@@ -3,7 +3,7 @@
 
 <mapper namespace="me.ricky.boardserver.mapper.UserProfileMapper">
     <select id="getUserProfile" resultType="me.ricky.boardserver.dto.UserDTO">
-        SELECT userId, userId, password, nickName, createTime, isWithDraw, status
+        SELECT id, userId, userId, password, nickName, createTime, isWithDraw, status
         FROM user
         WHERE userId = #{id}
     </select>

@@ -1,0 +1,32 @@
+### 등록
+POST {{host}}{{post}}
+Content-Type: application/json
+
+{
+  "name": "테스트 게시글",
+  "contents": "테스트 컨텐츠",
+  "categoryId": 1,
+  "fileId": 1
+}
+### 조회
+GET {{host}}{{post}}/my-posts
+
+### 수정
+PATCH {{host}}{{post}}/1
+Content-Type: application/json
+
+{
+  "name": "테스트 게시글 수정",
+  "contents": "테스트 컨텐츠 수정",
+  "categoryId": 1,
+  "fileId": 1
+}
+
+### 삭제
+DELETE {{host}}{{post}}/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "accountId": 0
+}
