@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="me.ricky.boardserver.mapper.PostMapper">
+<mapper namespace="me.ricky.boardserver.mapper.PostSearchMapper">
 
-    <select id="selectPosts" resultType="me.ricky.boardserver.dto.PostDTO" parameterType="me.ricky.boardserver.dto.request.PostSearchRequest">
+    <select id="selectPosts" resultType="me.ricky.boardserver.dto.request.PostSearchRequest">
         SELECT *
         FROM post
         WHERE 1=1
@@ -13,7 +13,7 @@
         <if test="contents != null and contents != ''">
             AND contents LIKE CONCAT(#{contents}, '%')
         </if>
-        <if test="categoryId != 0'">
+        <if test="categoryId != 0">
             AND categoryId = #{categoryId}
         </if>
         <if test="sortStatus.toString() == 'NEWEST'">

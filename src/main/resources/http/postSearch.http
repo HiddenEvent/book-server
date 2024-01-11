@@ -1,0 +1,10 @@
+### 조회
+POST {{host}}{{postSearch}}
+Content-Type: application/json
+
+{
+  "name": "테스트 게시글",
+  "contents": "테스트 컨텐츠",
+  "categoryId": 1,
+  "sortStatus": "NEWEST"
+}
