@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+
 @Service
 @Slf4j
 public class PostServiceImpl implements PostService {
@@ -38,7 +39,13 @@ public class PostServiceImpl implements PostService {
         }
         postDTO.setUserId(userProfile.getId());
         postDTO.setCreateTime(new Date());
-        postMapper.register(postDTO);
+        int postId = postMapper.register(postDTO);
+        postDTO.getTagDTOList().forEach(tagDTO -> {
+            tagDTO.setPostId(postDTO.getId());
+            int tagId = tagMapper.register(tagDTO);
+
+            tagMapper.createPostTag(tagId, postId);
+        });
     }
 
     @Override
