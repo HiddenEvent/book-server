@@ -1,7 +1,9 @@
 package me.ricky.boardserver.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import me.ricky.boardserver.dto.CommentDTO;
 import me.ricky.boardserver.dto.PostDTO;
+import me.ricky.boardserver.dto.TagDTO;
 import me.ricky.boardserver.dto.UserDTO;
 import me.ricky.boardserver.mapper.PostMapper;
 import me.ricky.boardserver.mapper.UserProfileMapper;
@@ -55,5 +57,35 @@ public class PostServiceImpl implements PostService {
             throw new RuntimeException("게시글 삭제 에러");
         }
         postMapper.delete(userId, postId);
+    }
+
+    @Override
+    public void registerComment(CommentDTO commentDTO) {
+
+    }
+
+    @Override
+    public void updateComment(CommentDTO commentDTO) {
+
+    }
+
+    @Override
+    public void deleteComment(int userId, int commentId) {
+
+    }
+
+    @Override
+    public void registerTag(TagDTO tagDTO) {
+
+    }
+
+    @Override
+    public void updateTag(TagDTO tagDTO) {
+
+    }
+
+    @Override
+    public void deleteTag(int userId, int tagId) {
+
     }
 }

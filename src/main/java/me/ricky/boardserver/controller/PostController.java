@@ -73,6 +73,8 @@ public class PostController {
     @LoginCheck(type = LoginCheck.UserType.USER)
     public ResponseEntity<CommonResponse<CommentDTO>> registerComment(String accountId,
                                                                       @RequestBody CommentDTO commentDTO) {
+        postService.registerComment(commentDTO);
+
         return null;
     }
 
