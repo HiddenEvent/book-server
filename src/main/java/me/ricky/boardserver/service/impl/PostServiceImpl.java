@@ -5,6 +5,7 @@ import me.ricky.boardserver.dto.CommentDTO;
 import me.ricky.boardserver.dto.PostDTO;
 import me.ricky.boardserver.dto.TagDTO;
 import me.ricky.boardserver.dto.UserDTO;
+import me.ricky.boardserver.mapper.CommentMapper;
 import me.ricky.boardserver.mapper.PostMapper;
 import me.ricky.boardserver.mapper.UserProfileMapper;
 import me.ricky.boardserver.service.PostService;
@@ -18,9 +19,12 @@ public class PostServiceImpl implements PostService {
     private final PostMapper postMapper;
     private final UserProfileMapper userProfileMapper;
 
-    public PostServiceImpl(PostMapper postMapper, UserProfileMapper userProfileMapper) {
+    private final CommentMapper commentMapper;
+
+    public PostServiceImpl(PostMapper postMapper, UserProfileMapper userProfileMapper, CommentMapper commentMapper) {
         this.postMapper = postMapper;
         this.userProfileMapper = userProfileMapper;
+        this.commentMapper = commentMapper;
     }
 
     @Override
