@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import me.ricky.boardserver.aop.LoginCheck;
+import me.ricky.boardserver.dto.CommentDTO;
 import me.ricky.boardserver.dto.PostDTO;
 import me.ricky.boardserver.dto.UserDTO;
 import me.ricky.boardserver.dto.response.CommonResponse;
@@ -30,6 +31,7 @@ public class PostController {
         this.userService = userService;
         this.postService = postService;
     }
+
     @PostMapping
     @LoginCheck(type = LoginCheck.UserType.USER)
     public ResponseEntity<CommonResponse<PostDTO>> register(String accountId,
@@ -49,8 +51,8 @@ public class PostController {
     @PatchMapping("{postId}")
     @LoginCheck(type = LoginCheck.UserType.USER)
     public ResponseEntity<CommonResponse<PostDTO>> update(String accountId,
-                                                               @PathVariable("postId") int postId,
-                                                               @RequestBody PostRequest postRequest) {
+                                                          @PathVariable("postId") int postId,
+                                                          @RequestBody PostRequest postRequest) {
         UserDTO userInfo = userService.getUserInfo(accountId);
         PostDTO postDTO = PostDTO.builder()
                 .id(postId)
@@ -65,6 +67,15 @@ public class PostController {
         postService.update(postDTO);
         return ResponseEntity.ok(new CommonResponse<>(HttpStatus.OK, "OK", "게시글 수정 성공", postDTO));
     }
+
+    @PostMapping("comments")
+    @ResponseStatus(HttpStatus.CREATED)
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<CommonResponse<CommentDTO>> registerComment(String accountId,
+                                                                      @RequestBody CommentDTO commentDTO) {
+        return null;
+    }
+
     @DeleteMapping("{postId}")
     @LoginCheck(type = LoginCheck.UserType.USER)
     public ResponseEntity<CommonResponse<PostDeleteRequest>> delete(String accountId,
