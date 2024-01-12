@@ -7,6 +7,7 @@ import me.ricky.boardserver.dto.TagDTO;
 import me.ricky.boardserver.dto.UserDTO;
 import me.ricky.boardserver.mapper.CommentMapper;
 import me.ricky.boardserver.mapper.PostMapper;
+import me.ricky.boardserver.mapper.TagMapper;
 import me.ricky.boardserver.mapper.UserProfileMapper;
 import me.ricky.boardserver.service.PostService;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,14 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     private final PostMapper postMapper;
     private final UserProfileMapper userProfileMapper;
-
     private final CommentMapper commentMapper;
+    private final TagMapper tagMapper;
 
-    public PostServiceImpl(PostMapper postMapper, UserProfileMapper userProfileMapper, CommentMapper commentMapper) {
+    public PostServiceImpl(PostMapper postMapper, UserProfileMapper userProfileMapper, CommentMapper commentMapper, TagMapper tagMapper) {
         this.postMapper = postMapper;
         this.userProfileMapper = userProfileMapper;
         this.commentMapper = commentMapper;
+        this.tagMapper = tagMapper;
     }
 
     @Override
