@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.ricky.boardserver.aop.LoginCheck;
 import me.ricky.boardserver.dto.CommentDTO;
 import me.ricky.boardserver.dto.PostDTO;
+import me.ricky.boardserver.dto.TagDTO;
 import me.ricky.boardserver.dto.UserDTO;
 import me.ricky.boardserver.dto.response.CommonResponse;
 import me.ricky.boardserver.service.PostService;
@@ -103,6 +104,49 @@ public class PostController {
         }
         postService.deleteComment(userInfo.getId(), commentId);
         CommonResponse response = new CommonResponse<>(HttpStatus.OK, "OK", "댓글 삭제 성공", commentId);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("tags")
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<CommonResponse<TagDTO>> registerTag(String accountId,
+                                                              @RequestBody TagDTO tagDTO) {
+        UserDTO userInfo = userService.getUserInfo(accountId);
+        if (userInfo == null) {
+            log.error("유저가 존재하지 않습니다. {}", accountId);
+            throw new RuntimeException("태그 등록 에러");
+        }
+        postService.registerTag(tagDTO);
+        CommonResponse response = new CommonResponse<>(HttpStatus.CREATED, "CREATED", "태그 등록 성공", tagDTO);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("tags/{tagId}")
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<CommonResponse<TagDTO>> updateTag(String accountId,
+                                                            @PathVariable("tagId") int tagId,
+                                                            @RequestBody TagDTO tagDTO) {
+        UserDTO userInfo = userService.getUserInfo(accountId);
+        if (userInfo == null) {
+            log.error("유저가 존재하지 않습니다. {}", accountId);
+            throw new RuntimeException("태그 수정 에러");
+        }
+        postService.updateTag(tagDTO);
+        CommonResponse response = new CommonResponse<>(HttpStatus.OK, "OK", "태그 수정 성공", tagDTO);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("tags/{tagId}")
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<CommonResponse<TagDTO>> deleteTag(String accountId,
+                                                            @PathVariable("tagId") int tagId) {
+        UserDTO userInfo = userService.getUserInfo(accountId);
+        if (userInfo == null) {
+            log.error("유저가 존재하지 않습니다. {}", accountId);
+            throw new RuntimeException("태그 삭제 에러");
+        }
+        postService.deleteTag(userInfo.getId(), tagId);
+        CommonResponse response = new CommonResponse<>(HttpStatus.OK, "OK", "태그 삭제 성공", tagId);
         return ResponseEntity.ok(response);
     }
 
