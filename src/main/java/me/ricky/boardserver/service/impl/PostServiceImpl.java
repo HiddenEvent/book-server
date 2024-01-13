@@ -74,17 +74,29 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void registerComment(CommentDTO commentDTO) {
-
+        if (commentDTO.getPostId() == 0) {
+            log.error("게시글 Id 유효하지 않음 {}", commentDTO);
+            throw new RuntimeException("댓글 등록 에러");
+        }
+        commentMapper.register(commentDTO);
     }
 
     @Override
     public void updateComment(CommentDTO commentDTO) {
-
+        if (commentDTO == null) {
+            log.error("댓글 수정 정보가 없습니다. {}", commentDTO);
+            throw new RuntimeException("댓글 수정 에러");
+        }
+        commentMapper.update(commentDTO);
     }
 
     @Override
     public void deleteComment(int userId, int commentId) {
-
+        if (userId == 0 || commentId == 0) {
+            log.error("댓글 삭제 정보가 없습니다. {}, {}", userId, commentId);
+            throw new RuntimeException("댓글 삭제 에러");
+        }
+        commentMapper.delete(commentId);
     }
 
     @Override
