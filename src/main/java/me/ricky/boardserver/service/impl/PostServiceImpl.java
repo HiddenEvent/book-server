@@ -101,16 +101,28 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void registerTag(TagDTO tagDTO) {
-
+        if (tagDTO == null) {
+            log.error("태그 등록 정보가 없습니다. {}", tagDTO);
+            throw new RuntimeException("태그 등록 에러");
+        }
+        tagMapper.register(tagDTO);
     }
 
     @Override
     public void updateTag(TagDTO tagDTO) {
-
+        if (tagDTO == null) {
+            log.error("태그 수정 정보가 없습니다. {}", tagDTO);
+            throw new RuntimeException("태그 수정 에러");
+        }
+        tagMapper.update(tagDTO);
     }
 
     @Override
     public void deleteTag(int userId, int tagId) {
-
+        if (userId == 0 || tagId == 0) {
+            log.error("태그 삭제 정보가 없습니다. {}, {}", userId, tagId);
+            throw new RuntimeException("태그 삭제 에러");
+        }
+        tagMapper.delete(tagId);
     }
 }
