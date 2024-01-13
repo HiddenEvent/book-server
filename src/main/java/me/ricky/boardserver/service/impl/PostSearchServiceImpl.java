@@ -29,4 +29,10 @@ public class PostSearchServiceImpl implements PostSearchService {
 
         return postDTOList;
     }
+
+    @Override
+    public List<PostDTO> getPostsByTagName(String tagName) {
+        List<PostDTO> postDTOList = postSearchMapper.getPostByTagName(tagName);
+        return postDTOList;
+    }
 }

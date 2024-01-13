@@ -7,10 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.ricky.boardserver.dto.PostDTO;
 import me.ricky.boardserver.dto.request.PostSearchRequest;
 import me.ricky.boardserver.service.PostSearchService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +23,11 @@ public class PostSearchController {
     @PostMapping
     public PostSearchResponse search(@RequestBody PostSearchRequest postSearchRequest) {
         List<PostDTO> postDTOList = postSearchService.getPosts(postSearchRequest);
+        return new PostSearchResponse(postDTOList);
+    }
+    @GetMapping
+    public PostSearchResponse searchByTagName(@RequestParam("tagName") String tagName) {
+        List<PostDTO> postDTOList = postSearchService.getPostsByTagName(tagName);
         return new PostSearchResponse(postDTOList);
     }
     @Getter

@@ -26,4 +26,12 @@
             ORDER BY categoryId ASC
         </if>
     </select>
+    <select id="getPostByTagName" resultType="me.ricky.boardserver.dto.PostDTO">
+        SELECT p.*
+        FROM post p
+                 JOIN postTag pt ON p.id = pt.postId
+                 JOIN tag t ON pt.tagId = t.id
+        WHERE t.name = #{tagName}
+    </select>
+
 </mapper>
