@@ -69,13 +69,41 @@ public class PostController {
     }
 
     @PostMapping("comments")
-    @ResponseStatus(HttpStatus.CREATED)
     @LoginCheck(type = LoginCheck.UserType.USER)
     public ResponseEntity<CommonResponse<CommentDTO>> registerComment(String accountId,
                                                                       @RequestBody CommentDTO commentDTO) {
         postService.registerComment(commentDTO);
+        CommonResponse response = new CommonResponse<>(HttpStatus.CREATED, "CREATED", "댓글 등록 성공", commentDTO);
+        return ResponseEntity.ok(response);
+    }
 
-        return null;
+    @PatchMapping("comments/{commentId}")
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<CommonResponse<CommentDTO>> updateComment(String accountId,
+                                                                    @PathVariable("commentId") int commentId,
+                                                                    @RequestBody CommentDTO commentDTO) {
+        UserDTO userInfo = userService.getUserInfo(accountId);
+        if (userInfo == null) {
+            log.error("유저가 존재하지 않습니다. {}", accountId);
+            throw new RuntimeException("댓글 수정 에러");
+        }
+        postService.updateComment(commentDTO);
+        CommonResponse response = new CommonResponse<>(HttpStatus.OK, "OK", "댓글 수정 성공", commentDTO);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("comments/{commentId}")
+    @LoginCheck(type = LoginCheck.UserType.USER)
+    public ResponseEntity<CommonResponse<CommentDTO>> deleteComment(String accountId,
+                                                                    @PathVariable("commentId") int commentId) {
+        UserDTO userInfo = userService.getUserInfo(accountId);
+        if (userInfo == null) {
+            log.error("유저가 존재하지 않습니다. {}", accountId);
+            throw new RuntimeException("댓글 삭제 에러");
+        }
+        postService.deleteComment(userInfo.getId(), commentId);
+        CommonResponse response = new CommonResponse<>(HttpStatus.OK, "OK", "댓글 삭제 성공", commentId);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("{postId}")
