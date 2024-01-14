@@ -30,3 +30,22 @@ Content-Type: application/json
   "id": 1,
   "accountId": 0
 }
+
+### 댓글 등록
+POST {{host}}{{post}}/comments
+Content-Type: application/json
+
+{
+  "postId": 2,
+  "contents": "댓글 테스트"
+}
+
+
+### 댓글 수정
+PATCH {{host}}{{post}}/comments/4
+Content-Type: application/json
+
+{
+  "postId": 2,
+  "contents": "댓글 테스트 수정"
+}
