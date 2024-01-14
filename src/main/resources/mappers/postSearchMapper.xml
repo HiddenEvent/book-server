@@ -22,7 +22,7 @@
         <if test="sortStatus.toString() == 'OLDEST'">
             ORDER BY createTime ASC
         </if>
-        <if test="sortStatus.toString() == 'CATEGORY'">
+        <if test="sortStatus.toString() == 'CATEGORIES'">
             ORDER BY categoryId ASC
         </if>
     </select>
