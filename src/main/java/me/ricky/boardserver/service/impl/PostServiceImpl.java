@@ -12,8 +12,10 @@ import me.ricky.boardserver.mapper.UserProfileMapper;
 import me.ricky.boardserver.service.PostService;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -40,6 +42,8 @@ public class PostServiceImpl implements PostService {
         postDTO.setUserId(userProfile.getId());
         postDTO.setCreateTime(new Date());
         postMapper.register(postDTO);
+
+        if (postDTO.getTagDTOList() == null) return;
         postDTO.getTagDTOList().forEach(tagDTO -> {
             tagDTO.setPostId(postDTO.getId());
             tagMapper.register(tagDTO);
