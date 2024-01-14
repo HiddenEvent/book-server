@@ -39,12 +39,11 @@ public class PostServiceImpl implements PostService {
         }
         postDTO.setUserId(userProfile.getId());
         postDTO.setCreateTime(new Date());
-        int postId = postMapper.register(postDTO);
+        postMapper.register(postDTO);
         postDTO.getTagDTOList().forEach(tagDTO -> {
             tagDTO.setPostId(postDTO.getId());
-            int tagId = tagMapper.register(tagDTO);
-
-            tagMapper.createPostTag(tagId, postId);
+            tagMapper.register(tagDTO);
+            tagMapper.createPostTag(tagDTO.getId(), postDTO.getId());
         });
     }
 

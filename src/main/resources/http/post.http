@@ -6,7 +6,17 @@ Content-Type: application/json
   "name": "테스트 게시글",
   "contents": "테스트 컨텐츠",
   "categoryId": 1,
-  "fileId": 1
+  "fileId": 1,
+  "tagDTOList": [
+    {
+      "name": "자유 게시판",
+      "url": "127.0.0.1"
+    },
+    {
+      "name": "개발 게시판",
+      "url": "127.0.0.1"
+    }
+  ]
 }
 ### 조회
 GET {{host}}{{post}}/my-posts
@@ -48,4 +58,24 @@ Content-Type: application/json
 {
   "postId": 2,
   "contents": "댓글 테스트 수정"
+}
+
+### 태그 등록
+POST {{host}}{{post}}/tags
+Content-Type: application/json
+
+{
+  "id": 0,
+  "name": "태그 테스트",
+  "url": "http://localhost:8080"
+}
+
+### 태그 수정
+PATCH {{host}}{{post}}/tags/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "태그 테스트 수정",
+  "url": "http://localhost:8080"
 }
