@@ -6,6 +6,7 @@ import me.ricky.boardserver.dto.request.PostSearchRequest;
 import me.ricky.boardserver.mapper.PostSearchMapper;
 import me.ricky.boardserver.service.PostSearchService;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class PostSearchServiceImpl implements PostSearchService {
     public PostSearchServiceImpl(PostSearchMapper postSearchMapper) {
         this.postSearchMapper = postSearchMapper;
     }
+    @Async
     @Cacheable(value = "getPosts", key = "'getPosts' + #postSearchRequest.getName() + #postSearchRequest.getCategoryId()")
     @Override
     public List<PostDTO> getPosts(PostSearchRequest postSearchRequest) {
